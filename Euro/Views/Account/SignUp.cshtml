@@ -1,0 +1,59 @@
+﻿@model Euro.Models.RegisterModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Euro - Sign Up</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            Sign Up
+            <div class="col-md-12">
+                <div class="col-md-6">
+                    <form action="/Account/SignUp" method="post">
+                        <input type="text" asp-for="FirstName" class="form-control" placeholder="First Name" />
+                        <span class="text-danger" asp-validation-for="FirstName"></span>
+                        <br />
+                        <input type="text" asp-for="LastName" class="form-control" placeholder="Last Name" />
+                        <span class="text-danger" asp-validation-for="LastName"></span>
+                        <br />
+                        <input type="email" asp-for="Email" class="form-control" placeholder="Email" />
+                        <span class="text-danger" asp-validation-for="Email"></span>
+                        <br />
+                        <input type="tel" asp-for="UserName" class="form-control" placeholder="User name" />
+                        <span class="text-danger" asp-validation-for="UserName"></span>
+                        <br />
+                        <input type="password" asp-for="Password" class="form-control" placeholder="Password" />
+                        <span class="text-danger" asp-validation-for="Password"></span>
+                        <br />
+                        <br />
+                        <input type="submit" class="btn btn-dark" value="Sign Up" />
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2020 - Euro - <a asp-area="" asp-page="/Privacy">Privacy</a>
+        </div>
+    </footer>
+
+
+</body>
+</html>
+

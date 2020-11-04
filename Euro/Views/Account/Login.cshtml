@@ -1,0 +1,106 @@
+﻿@model Euro.Models.LoginModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Euro - Login</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+    <div class="container">
+        Sign In
+        <div class="col-md-12">
+            <div class="col-md-6">
+                <input type="submit" class="btn btn-dark" value="Login with Google" />
+                <br />
+                <br />
+                <input type="submit" class="btn btn-dark" value="Login with LinkedIn" />
+                <br />
+                <br />
+                <input type="submit" class="btn btn-dark" value="Login with Facebook" />
+            </div>
+            <br />
+            <div class="col-md-6">
+                <form id="LoginForm" action="/Account/ValidateLogin" method="post">
+                    <input type="text" asp-for="UserName" class="form-control" placeholder="Email" />
+                    <span class="text-danger" asp-validation-for="UserName"></span>
+                    <br />
+                    <input type="password" asp-for="Password" class="form-control" placeholder="Password" />
+                    <span class="text-danger" asp-validation-for="Password"></span>
+                    <br />
+                    <input type="checkbox" name="RememberMe" /> Remember Me
+                    <br />
+                    <input type="button" onclick="Login()" class="btn btn-dark" value="Sign In" />
+                    <br />
+                    <span>I forgot my password</span>
+                </form>
+            </div>
+        </div>
+        <br />
+        Don't have an account yet ?<a href="/Account/SignUp">Sign Up</a>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2020 - Euro - <a asp-area="" asp-page="/Privacy">Privacy</a>
+        </div>
+    </footer>
+
+
+</body>
+</html>
+
+<script>
+
+    $(document).ready(function () {
+        if (history.pushState != undefined) {
+            history.pushState(null, null, location.href);
+        }
+        history.back();
+        history.forward();
+        window.onpopstate = function () {
+            history.go(1);
+        };
+    });
+    function Login() {
+        var valid = checkEmail($('#UserName').val());
+        if (!valid) {
+            alert('Not a valid e-mail address');
+        } else {
+            $("#LoginForm").submit();
+        }
+    }
+
+var checkEmail = function(value) {
+    var valid = true;
+    if (value.indexOf("@@") == -1) {
+        valid = false;
+    } else {
+        var parts = value.split('@@');
+        var domain = parts[1];
+        if (domain.indexOf('.') == -1) {
+            valid = false;
+        } else {
+            var domainParts = domain.split('.');
+            var ext = domainParts[1];
+            if (ext.length > 4 || ext.length < 2) {
+                valid = false;
+            }
+        }
+    }
+    return valid;
+};
+
+</script>
+
